@@ -6,7 +6,7 @@ products.forEach(product => {
     <div class="product-container">
     <div class="product-image-container">
     <img class="product-image"
-    src=${product.image}"">
+    src="${product.image}" alt = "${product.name}">
     </div>
     
     <div class="product-name limit-text-to-2-lines">
@@ -52,7 +52,6 @@ products.forEach(product => {
     </button>
     </div>
     
-    `
-    
+    `    
 });
 document.querySelector('.products-grid').innerHTML = productsHTML;
