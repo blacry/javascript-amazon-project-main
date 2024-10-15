@@ -1,6 +1,7 @@
 import { cart , addToCart , updateCartQuantity } from "../data/cart.js";
 import { products } from "../data/products.js";
 
+updateCartQuantity('.cart-quantity');
 let productsHTML = '';
 
 products.forEach(product => {
@@ -19,7 +20,7 @@ products.forEach(product => {
     <img class="product-rating-stars"
     src="images/ratings/rating-${product.rating.stars *10 }.png">
     <div class="product-rating-count link-primary">
-    -${product.rating.count}
+    - ${product.rating.count}
     </div>
     </div>
     
@@ -61,7 +62,7 @@ document.querySelectorAll('.add-to-cart-button').forEach(button => {
     button.addEventListener('click', () => {  
         let productId = button.dataset.productId
         addToCart(productId);
-        updateCartQuantity();
+        updateCartQuantity('.cart-quantity');
         })
         
         
