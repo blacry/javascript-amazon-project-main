@@ -1,11 +1,10 @@
 import { cart , addToCart , updateCartQuantity } from "../data/cart.js";
 import { products } from "../data/products.js";
-
+//refreshes the cartquantity that is fetched from localstorage
 updateCartQuantity('.cart-quantity');
-let productsHTML = '';
 
-products.forEach(product => {
-    productsHTML += `
+let productsHTML = '';
+products.forEach(product => productsHTML += `
     <div class="product-container">
     <div class="product-image-container">
     <img class="product-image"
@@ -55,18 +54,18 @@ products.forEach(product => {
     </button>
     </div>
     `    
-});
-
+);
+//makes the productlist render dynamic by taking data from backend and displaying it in th dom
 document.querySelector('.products-grid').innerHTML = productsHTML;
+
+//made addtocart btn interactive and be able to push obj into the cart array
 document.querySelectorAll('.add-to-cart-button').forEach(button => {
     button.addEventListener('click', () => {  
         let productId = button.dataset.productId
         addToCart(productId);
         updateCartQuantity('.cart-quantity');
-        })
-        
-        
-    })
+    })        
+})
 // setInterval(() => {
 //     console.log(cart);
 // }, 3000);

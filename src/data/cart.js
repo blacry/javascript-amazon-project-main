@@ -1,3 +1,4 @@
+//retrives the stored cart from localstorage and saves it in variable cart of type array
 export let cart = JSON.parse( localStorage.getItem('cart')) || [
     {
         productId: "83d4ca15-0f35-48f5-b7a3-1ea210004f2e" ,
@@ -16,8 +17,9 @@ export let cart = JSON.parse( localStorage.getItem('cart')) || [
         quantity: 1 ,
     }
 ]
+//it adds obj to the cart😒
 export function addToCart(productId) {
-
+    
     let matchingItem;
     cart.forEach(cartItem => {
         if (cartItem.productId === productId) {
@@ -34,27 +36,21 @@ export function addToCart(productId) {
     }
     saveCartToStorage()
 }
+//it updated the quantity value of obj inside the cart😒
 export function updateCartQuantity(HTMLclass) {
     let cartQuantity = 0;
     cart.forEach(product => cartQuantity += product.quantity);  
     document.querySelector(HTMLclass).innerHTML = cartQuantity
-    
 }
-
+//it removes a obj from the cart😒
 export function removeCartItem(productId) {
     cart = cart.filter((cartItem) => cartItem.productId !== productId);
     saveCartToStorage()
 }
-
+// it saves the cart to localstorage😒
 function saveCartToStorage() {
     localStorage.setItem('cart', JSON.stringify(cart) )    
 }
-
-
-
-
-
-
 
 // setInterval(() => {
 // console.log(cart);
