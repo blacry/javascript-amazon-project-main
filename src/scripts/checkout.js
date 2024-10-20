@@ -24,7 +24,8 @@ function realTimeDate(chooseDate) {
     return deliveryDate
 }
 
-//dynaaaaaamic my ass... it dynamiclly gets the date and displays and reduces redundent HTML
+//dynaaaaaamic my ass... 
+//it dynamiclly gets the date and displays and reduces redundent HTML
 function deliveryOptionsHTML(matchingItem , cartItem) {
     let html = `` 
     let checkedDate = ''

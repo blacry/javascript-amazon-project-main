@@ -1,3 +1,4 @@
+// it is an immutable list, ill never mutate it
 export const deliveryOptions = [
 {       
     id: 1,
@@ -12,7 +13,7 @@ export const deliveryOptions = [
 {
     id: 3,
     deliveryDays:1,
-    priceCents:999,
+    priceCents:999, 
 },
 ]
 export default deliveryOptions
