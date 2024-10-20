@@ -52,8 +52,9 @@ export function removeCartItem(productId) {
     cart = cart.filter((cartItem) => cartItem.productId !== productId);
     saveCartToStorage()
 }
+
 // it saves the cart to localstorage😒
-function saveCartToStorage() {
+export function saveCartToStorage() {
     localStorage.setItem('cart', JSON.stringify(cart) )    
 }
 
