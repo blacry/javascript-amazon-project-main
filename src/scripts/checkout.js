@@ -1,11 +1,17 @@
 import { cart , addToCart , updateCartQuantity , removeCartItem } from "../data/cart.js";
 import { products } from "../data/products.js";
+import { deliveryOptions } from "../data/deliveryOptions.js";
+import dayjs from "https://unpkg.com/dayjs@1.11.10/esm/index.js";
 
-updateCartQuantity('.return-to-home-cart-list')
+//updates the cart quantity😒
+updateCartQuantity('.return-to-home-cart-list');
+
+//one more dynamic shit😭
 let cartSummaryHTML = ''
 
 cart.forEach(cartItem => {
     
+  //it gets the id from the product list to get all the needed data about the product
     let matchingItem;
     
     products.forEach(productItem => {
@@ -13,7 +19,7 @@ cart.forEach(cartItem => {
          matchingItem = productItem;
         }
     });  
-       
+  // this is the html, do i need to explain even that to you 😑
     cartSummaryHTML += ` 
         <div class="cart-item-container" id="cart-item-container-${matchingItem.id}">
             <div class="delivery-date">
