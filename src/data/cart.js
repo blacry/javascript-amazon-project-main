@@ -1,5 +1,3 @@
-import { deliveryOptions } from "./deliveryOptions";
-
 //retrives the stored cart from localstorage and saves it in variable cart of type array
 export let cart = JSON.parse( localStorage.getItem('cart')) || [
     {
@@ -37,7 +35,8 @@ export function addToCart(productId) {
     }else{
         cart.push({
             productId: productId,
-            quantity: 1 
+            quantity: 1 ,
+            deliveryOptionId: '1'
         });
     }
     saveCartToStorage()

@@ -15,3 +15,4 @@ export const deliveryOptions = [
     priceCents:999,
 },
 ]
+export default deliveryOptions
