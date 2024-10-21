@@ -1,74 +1,77 @@
 import { cart , addToCart , updateCartQuantity } from "../data/cart.js";
-import { products } from "../data/products.js";
+import { products , loadpage } from "../data/products.js";
 
-//refreshes the cartquantity that is fetched from localstorage
-updateCartQuantity('.cart-quantity');
+loadpage(renderProductGrid)
 
-let productsHTML = '';
-products.forEach(product => productsHTML += `
-    <div class="product-container">
-    <div class="product-image-container">
-    <img class="product-image"
-    src="${product.image}" alt = "${product.name}">
-    </div>
+function renderProductGrid() {
     
-    <div class="product-name limit-text-to-2-lines">
-    ${product.name}
-    </div>
+    //refreshes the cartquantity that is fetched from localstorage
+    updateCartQuantity('.cart-quantity');
     
-    <div class="product-rating-container">
-    <img class="product-rating-stars"
-    src="${product.getStarsUrl()}">
+    let productsHTML = '';
+    products.forEach(product => productsHTML += `
+        <div class="product-container">
+        <div class="product-image-container">
+        <img class="product-image"
+        src="${product.image}" alt = "${product.name}">
+        </div>
     
-    <div class="product-rating-count link-primary">
-    - ${product.rating.count}
-    </div>
-    </div>
-    
-    <div class="product-price">
-    ${product.getprice()}
-    
-    </div>
-    
-    <div class="product-quantity-container">
-    <select>
-    <option selected value="1">1</option>
-    <option value="2">2</option>
-    <option value="3">3</option>
-    <option value="4">4</option>
-    <option value="5">5</option>
-    <option value="6">6</option>
-    <option value="7">7</option>
-    <option value="8">8</option>
-    <option value="9">9</option>    
-    <option value="10">10</option>
-    </select>
-    </div>
-    
-    <div class="product-spacer"></div>
-    
-    <div class="added-to-cart">
-    <img src="images/icons/checkmark.png">
-    Added
-    </div>
-    
-    <button class="add-to-cart-button button-primary" data-product-id = "${product.id}" >
-    Add to Cart
-    </button>
-    </div>
-    `    
-);
-//makes the productlist render dynamic by taking data from backend and displaying it in th dom
-document.querySelector('.products-grid').innerHTML = productsHTML;
+        <div class="product-name limit-text-to-2-lines">
+        ${product.name}
+        </div>
+        
+        <div class="product-rating-container">
+        <img class="product-rating-stars"
+        src="${product.getStarsUrl()}">
+        
+        <div class="product-rating-count link-primary">
+        - ${product.rating.count}
+        </div>
+        </div>
+        
+        <div class="product-price">
+        ${product.getprice()}
+        
+        </div>
+        
+        <div class="product-quantity-container">
+        <select>
+        <option selected value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+        <option value="6">6</option>
+        <option value="7">7</option>
+        <option value="8">8</option>
+        <option value="9">9</option>    
+        <option value="10">10</option>
+        </select>
+        </div>
+        
+        <div class="product-spacer"></div>
+        
+        <div class="added-to-cart">
+        <img src="images/icons/checkmark.png">
+        Added
+        </div>
+        
+        <button class="add-to-cart-button button-primary" data-product-id = "${product.id}" >
+        Add to Cart
+        </button>
+        </div>
+        `    
+    );
+    //makes the productlist render dynamic by taking data from backend and displaying it in th dom
+    document.querySelector('.products-grid').innerHTML = productsHTML;
 
-//made addtocart btn interactive and be able to push obj into the cart array
-document.querySelectorAll('.add-to-cart-button').forEach(button => {
-    button.addEventListener('click', () => {  
-        let productId = button.dataset.productId
-        addToCart(productId);
-        updateCartQuantity('.cart-quantity');
-    })        
-})
-// setInterval(() => {
-//     console.log(cart);
-// }, 3000);
+    //made addtocart btn interactive and be able to push obj into the cart array
+    document.querySelectorAll('.add-to-cart-button').forEach(button => {
+        button.addEventListener('click', () => {  
+            let productId = button.dataset.productId
+            addToCart(productId);
+            updateCartQuantity('.cart-quantity');
+        })        
+    })
+
+}
