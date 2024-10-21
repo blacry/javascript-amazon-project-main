@@ -1,9 +1,11 @@
 import { cart , addToCart , updateCartQuantity , removeCartItem , saveCartToStorage } from "../data/cart.js";
 import { products , getMatchingItem } from "../data/products.js";
 import {deliveryOptions , deliveryPriceCents} from "../data/deliveryOptions.js";
+import {formatPrice} from "../scripts/utils/utils.js";
 import dayjs from "https://unpkg.com/dayjs@1.11.10/esm/index.js";
 
 // as the name says it renders cartsummary🫡
+renderCartSummary();
 function renderCartSummary() {
 //     //one more dynamic shit😭
     let cartSummaryHTML = ''
@@ -87,7 +89,6 @@ function renderCartSummary() {
     }
     
 }
-renderCartSummary();
 //gets the date needed via ext lib dayjs🫲😁🫱
 function realTimeDate(chooseDate) {
     const deliveryDate = dayjs().add( chooseDate , 'days' ).format('dddd, MMMM D')
@@ -125,26 +126,30 @@ function renderDeliveryOptionsHTML(matchingItem , cartItem) {
 
 
 //as the name says it renders the order summary🫡
+renderOrderSummary();
 function renderOrderSummary() {
-    
     updateCartQuantity('.total-product-in-cart');
-
-    let totalPriceCents = 0;
-    let totalShippingPriceCents = 0;
+    // defining all the veriables needed for the order summary
+    const totalprice = {
+        totalPriceCents: 0,
+        totalShippingPriceCents: 0,
+        totalPriceCentsBeforeTax: 0,
+        totalPriceCentsAfterTax: 0,
+        orderTotalPrice: 0
+    }
     cart.forEach(cartItem => {
         let matchingItem = getMatchingItem(cartItem);  
-        totalPriceCents += matchingItem.priceCents * cartItem.quantity;
-        let deliveryPriceInCents = deliveryPriceCents(cartItem.deliveryOptionId);
-        totalShippingPriceCents += deliveryPriceInCents * cartItem.quantity;
+        totalprice.totalPriceCents += matchingItem.priceCents * cartItem.quantity;
+        totalprice.totalShippingPriceCents += deliveryPriceCents(cartItem.deliveryOptionId) * cartItem.quantity;
     })
-    let totalPriceCentsBeforeTax = totalPriceCents + totalShippingPriceCents;
-    let totalPriceCentsAfterTax = totalPriceCentsBeforeTax * 0.1;
-    let orderTotalPrice = totalPriceCentsAfterTax + totalPriceCentsBeforeTax
-    document.querySelector('.payment-summary-money-alltotal').innerHTML = `$${(totalPriceCents/100).toFixed(2)}`;
-    document.querySelector('.payment-summary-money-shipping').innerHTML = `$${(totalShippingPriceCents/100).toFixed(2)}`;
-    document.querySelector('.payment-summary-money-subtotal').innerHTML = `$${(totalPriceCentsBeforeTax/100).toFixed(2)}`;
-    document.querySelector('.payment-summary-money-tax').innerHTML = `$${(totalPriceCentsAfterTax/100).toFixed(2)}`;
-    document.querySelector('.payment-summary-money-total').innerHTML = `$${(orderTotalPrice/100).toFixed(2)}`;
+    totalprice.totalPriceCentsBeforeTax = totalprice.totalPriceCents + totalprice.totalShippingPriceCents;
+    totalprice.totalPriceCentsAfterTax = totalprice.totalPriceCentsBeforeTax * 0.1;
+    totalprice.orderTotalPrice = totalprice.totalPriceCentsAfterTax + totalprice.totalPriceCentsBeforeTax
     
+    // renders all the prices for the user to see
+    document.querySelector('.payment-summary-money-alltotal').innerHTML = `$${formatPrice(totalprice.totalPriceCents)}`;
+    document.querySelector('.payment-summary-money-shipping').innerHTML = `$${formatPrice(totalprice.totalShippingPriceCents)}`;    
+    document.querySelector('.payment-summary-money-subtotal').innerHTML = `$${formatPrice(totalprice.totalPriceCentsBeforeTax)}`;
+    document.querySelector('.payment-summary-money-tax').innerHTML = `$${formatPrice(totalprice.totalPriceCentsAfterTax)}`;
+    document.querySelector('.payment-summary-money-total').innerHTML = `$${formatPrice(totalprice.orderTotalPrice)}`;
 }
-renderOrderSummary();

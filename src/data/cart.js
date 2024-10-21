@@ -57,7 +57,6 @@ export function removeCartItem(productId) {
 export function saveCartToStorage() {
     localStorage.setItem('cart', JSON.stringify(cart) )    
 }
-
 // setInterval(() => {
 // console.log(cart);
 // }, 3000);
