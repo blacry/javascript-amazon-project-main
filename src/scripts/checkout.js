@@ -29,7 +29,7 @@ function renderCartSummary() {
         ${matchingItem.name}
         </div>
         <div class="product-price">
-        $${matchingItem.getprice()}
+        ${matchingItem.getprice()}
         </div>
         <div class="product-quantity">
         <span>
