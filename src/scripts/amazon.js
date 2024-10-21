@@ -1,6 +1,6 @@
 import { cart , addToCart , updateCartQuantity } from "../data/cart.js";
 import { products } from "../data/products.js";
-import {formatPrice} from "../scripts/utils/utils.js";
+
 //refreshes the cartquantity that is fetched from localstorage
 updateCartQuantity('.cart-quantity');
 
@@ -18,7 +18,7 @@ products.forEach(product => productsHTML += `
     
     <div class="product-rating-container">
     <img class="product-rating-stars"
-    src="images/ratings/rating-${product.rating.stars *10 }.png">
+    src="${product.getStarsUrl()}">
     
     <div class="product-rating-count link-primary">
     - ${product.rating.count}
@@ -26,7 +26,7 @@ products.forEach(product => productsHTML += `
     </div>
     
     <div class="product-price">
-    ${formatPrice(product.priceCents)}
+    ${product.getprice()}
     
     </div>
     

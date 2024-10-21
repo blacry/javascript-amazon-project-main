@@ -1,3 +1,27 @@
+import { formatPrice } from "../scripts/utils/utils.js";
+class ProductsClass {
+	id;
+	image;
+	name;
+	rating;
+	priceCents;
+	keywords;
+	constructor(productDetails) {
+		this.id = productDetails.id;
+		this.image = productDetails.image;
+		this.name = productDetails.name;
+		this.rating = productDetails.rating;
+		this.priceCents = productDetails.priceCents;
+		this.keywords = productDetails.keywords;
+	}
+	getStarsUrl() {
+		return `images/ratings/rating-${this.rating.stars * 10}.png`;
+	}
+	getprice(){
+		return `$${formatPrice(this.priceCents)}`
+	}
+}
+
 //it gets the id from the product list to get all the needed data about the product👌
 export const products = [
 	{
@@ -658,11 +682,12 @@ export const products = [
 		"mens"
 	  ]
 	}
-  ];
-  
-  // it takes cartItem and returns the matching productItem form the products array🫠
-  export function getMatchingItem(cartItem) {
-	let matchingItem;
-	products.forEach(productItem => cartItem.productId == productItem.id ? matchingItem = productItem : '' );
-	return matchingItem
-  }
+].map(productDetails => new ProductsClass(productDetails));
+
+
+// it takes cartItem and returns the matching productItem form the products array🫠
+export function getMatchingItem(cartItem) {
+let matchingItem;
+products.forEach(productItem => cartItem.productId == productItem.id ? matchingItem = productItem : '' );
+return matchingItem
+}
