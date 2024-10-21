@@ -18,6 +18,7 @@ products.forEach(product => productsHTML += `
     <div class="product-rating-container">
     <img class="product-rating-stars"
     src="images/ratings/rating-${product.rating.stars *10 }.png">
+    //src="${products.getStarsUrl()}">
     <div class="product-rating-count link-primary">
     - ${product.rating.count}
     </div>
@@ -25,6 +26,7 @@ products.forEach(product => productsHTML += `
     
     <div class="product-price">
     ${(product.priceCents / 100).toFixed(2) }
+    // ${products.getprice()}
     </div>
     
     <div class="product-quantity-container">
