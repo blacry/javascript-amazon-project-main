@@ -17,3 +17,11 @@ export const deliveryOptions = [
 },
 ]
 export default deliveryOptions
+
+export function deliveryPriceCents(deliveryId) {
+    let deliveryPriceCents = 0;
+    deliveryOptions.forEach(deliveryOption => {
+        deliveryOption.id == deliveryId ? deliveryPriceCents = deliveryOption.priceCents : ''
+    });
+    return deliveryPriceCents || deliveryOptions[0].priceCents 
+}

@@ -1,3 +1,4 @@
+//it gets the id from the product list to get all the needed data about the product👌
 export const products = [
   {
     id: "e43638ce-6aa0-4b85-b27f-e1d07eb678c6",
@@ -658,3 +659,10 @@ export const products = [
     ]
   }
 ];
+
+// it takes cartItem and returns the matching productItem form the products array🫠
+export function getMatchingItem(cartItem) {
+  let matchingItem;
+  products.forEach(productItem => cartItem.productId == productItem.id ? matchingItem = productItem : '' );
+  return matchingItem
+}
